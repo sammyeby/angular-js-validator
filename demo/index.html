@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="esNgValidatorDemo">
+    <head>
+        <meta charset="UTF-8">
+        <title>ES-Angular-Validator</title>
+        <link rel="stylesheet"
+              href="css/app.css">
+
+    </head>
+    <body ng-controller="DemoCtrl">
+        <h2 class="page-header">
+            ES-NG-VALIDATOR Demo ==> AngularJs
+        </h2>
+        <div class="demo-wrapper">
+            <div class="form-wrapper">
+                <form name="testForm"
+                      class="demo-form"
+                      es-validator-initiator>
+                    <table class="demo-form-table">
+                        <tr class="demo-form__row">
+                            <td class="demo-form__cell">
+                                <div class="cell-item-wrapper">
+                                    <div class="item-title">
+                                        Single Validator
+                                    </div>
+                                    <input es-validator="checkLength"
+                                           ng-class="{error: testForm.$inputsStates.single.$invalid && testForm.$inputsStates.single.$dirty && testForm.$inputsStates.single.$touched}"
+                                           class="text-box"
+                                           name="single"
+                                           ng-model="modelObj.single"
+                                           required>
+                                </div>
+                                <pre>{{testForm.$inputsStates.single | json}}</pre>
+                            </td>
+                        </tr>
+                        <tr class="demo-form__row">
+                            <td class="demo-form__cell">
+                                <div class="cell-item-wrapper">
+                                    <div class="item-title">
+                                        Multiple Validators
+                                    </div>
+                                    <input class="text-box"
+                                           name="multi"
+                                           ng-class="{error: testForm.$inputsStates.multi.$invalid && testForm.$inputsStates.multi.$dirty && testForm.$inputsStates.multi.$touched}"
+                                           es-validator="testInput"
+                                           ng-model="modelObj.multi"
+                                           es-validator-multi="[{name: 'checkLength', validator: checkLength}, {name: 'isValidLength', validator: isValidLength}]">
+                                </div>
+                                <pre>{{testForm.$inputsStates.multi | json}}</pre>
+                            </td>
+                        </tr>
+                        <tr class="demo-form__row">
+                            <td class="demo-form__cell">
+                                <div class="cell-item-wrapper">
+                                    <div class="item-title">
+                                        Single Async Validator
+                                    </div>
+                                    <input class="text-box"
+                                           name="async"
+                                           es-validator-async="asyncValidatorTest1"
+                                           ng-class="{error: testForm.$inputsStates.async.$invalid && testForm.$inputsStates.async.$dirty && testForm.$inputsStates.async.$touched}"
+                                           ng-model="modelObj.async">
+                                </div>
+                                <pre>{{testForm.$inputsStates.async | json}}</pre>
+                            </td>
+                        </tr>
+                        <tr class="demo-form__row">
+                            <td class="demo-form__cell">
+                                <div class="cell-item-wrapper">
+                                    <div class="item-title">
+                                        Async Validator Multi
+                                    </div>
+                                    <input class="text-box"
+                                           name="asyncMulti"
+                                           es-validator-async-multi="customAsyncValidatorsArray"
+                                           ng-class="{error: testForm.$inputsStates.asyncMulti.$invalid && testForm.$inputsStates.asyncMulti.$dirty && testForm.$inputsStates.asyncMulti.$touched}"
+                                           ng-model="modelObj.asyncMulti">
+                                </div>
+                                <pre>{{testForm.$inputsStates.asyncMulti | json}}</pre>
+                            </td>
+                        </tr>
+                        <tr class="demo-form__row">
+                            <td class="demo-form__cell">
+                                <div class="cell-item-wrapper">
+                                    <div class="item-title ">
+                                        Dependent Validator <button style="height: 30px; cursor: pointer;" ng-click="toggleInput()" type="button">Toggle New Dependent Input Box</button>
+                                    </div>
+                                    <div class="dependants">
+                                        <div class="item">
+                                            <input type="number"
+                                                   class="text-box"
+                                                   name="dependant_1"
+                                                   ng-class="{error: testForm.$inputsStates.dependant_1.$invalid && testForm.$inputsStates.dependant_1.$dirty && testForm.$inputsStates.dependant_1.$touched}"
+                                                   ng-model="modelObj.dependants.one"
+                                                   es-dependent-validator="isValidPercent">
+
+                                            <pre>{{testForm.$inputsStates.dependant_1 | json}}</pre>
+
+                                        </div>
+                                        <div class="item">
+                                            <input type="number"
+                                                   class="text-box"
+                                                   name="dependant_2"
+                                                   ng-class="{error: testForm.$inputsStates.dependant_2.$invalid && testForm.$inputsStates.dependant_2.$dirty && testForm.$inputsStates.dependant_2.$touched}"
+                                                   ng-model="modelObj.dependants.two"
+                                                   es-dependent-validator="isValidPercent">
+
+                                            <pre>{{testForm.$inputsStates.dependant_2 | json}}</pre>
+
+                                        </div>
+                                        <div class="item" ng-if="addNewInput">
+                                            <input type="number"
+                                                   class="text-box"
+                                                   name="dependant_3"
+                                                   ng-class="{error: testForm.$inputsStates.dependant_3.$invalid && testForm.$inputsStates.dependant_3.$dirty && testForm.$inputsStates.dependant_3.$touched}"
+                                                   ng-model="modelObj.dependants.three"
+                                                   es-dependent-validator="isValidPercent">
+
+                                            <pre>{{testForm.$inputsStates.dependant_3 | json}}</pre>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr class="demo-form__row">
+                            <td class="demo-form__cell">
+                                <div class="cell-item-wrapper">
+                                    <div class="item-title">
+                                        Custom input text with es-validator
+                                    </div>
+                                    <es-custom-text-input ng-model="modelObj.customSingle"
+                                                          name="customSingle"
+                                                          input-error="testForm.$inputsStates.customSingle.$invalid && testForm.$inputsStates.customSingle.$dirty && testForm.$inputsStates.customSingle.$touched"
+                                                          es-validator="customElementValidate"></es-custom-text-input>
+                                </div>
+                                <pre>{{testForm.$inputsStates.customSingle | json}}</pre>
+                            </td>
+                        </tr>
+                        <tr class="demo-form__row">
+                            <td class="demo-form__cell">
+                                <div class="cell-item-wrapper">
+                                    <div class="item-title">
+                                        Custom input text with es-validator-multi
+                                    </div>
+                                    <es-custom-text-input ng-model="modelObj.customMulti"
+                                                          name="customMulti"
+                                                          ng-model-options="{updateOn: 'blur'}"
+                                                          input-error="testForm.$inputsStates.customMulti.$invalid && testForm.$inputsStates.customMulti.$dirty && testForm.$inputsStates.customMulti.$touched"
+                                                          es-validator-multi="[{name: 'checkLength', validator: checkLength}, {name: 'isValidLength', validator: isValidLength}]"></es-custom-text-input>
+                                </div>
+                                <pre>{{testForm.$inputsStates.customMulti | json}}</pre>
+                            </td>
+                        </tr>
+                        <tr class="demo-form__row">
+                            <td class="demo-form__cell">
+                                <div class="cell-item-wrapper">
+                                    <div class="item-title">
+                                        Custom input text with Dependent Validator
+                                    </div>
+                                    <div class="dependants">
+                                        <div class="item">
+                                            <es-custom-text-input ng-model="modelObj.customDependants.one"
+                                                                  name="customDependants_1"
+                                                                  input-error="testForm.$inputsStates.customDependants_1.$invalid && testForm.$inputsStates.customDependants_1.$dirty && testForm.$inputsStates.customDependants_1.$touched"
+                                                                  es-dependent-validator="customDependentValidator"></es-custom-text-input>
+                                            <pre>{{testForm.$inputsStates.customDependants_1 | json}}</pre>
+                                        </div>
+                                        <div class="item">
+                                            <es-custom-text-input ng-model="modelObj.customDependants.two"
+                                                                  name="customDependants_2"
+                                                                  input-error="testForm.$inputsStates.customDependants_2.$invalid && testForm.$inputsStates.customDependants_2.$dirty && testForm.$inputsStates.customDependants_2.$touched"
+                                                                  es-dependent-validator="customDependentValidator"></es-custom-text-input>
+
+                                            <pre>{{testForm.$inputsStates.customDependants_2 | json}}</pre>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+
+                        </tr>
+                    </table>
+                    <!--{{testForm.$inputsStates}}-->
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript" src="script/libs.js"></script>
+        <script type="text/javascript" src="script/demo.js"></script>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "name": "es-ng-validator",
+  "version": "1.0.0",
+  "description": "Standalone and easy to use implementation of angularJs custom form validation",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "keywords": [
+    "angular",
+    "angularJs",
+    "form",
+    "validation",
+    "validator",
+    "custom",
+    "form",
+    "validation"
+  ],
+  "author": "Samuel Umeh <samuel.umeh@ergosign.de>",
+  "license": "ISC",
+  "dependencies": {
+    "angular": ">=1.5.0",
+    "jquery": "^3.2.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-watch": "^4.3.11",
+    "pump": "^1.0.2"
+  }
+}

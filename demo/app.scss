@@ -1,0 +1,84 @@
+html body {
+    color:            #545454;
+}
+pre {
+    border: 1px dotted red;
+    background: #545454;
+    color: lightblue;
+}
+
+.demo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .form-wrapper {
+        width: 100%;
+        .demo-form-table {
+            width: 100%;
+            max-width: 700px;
+            .demo-form__row {
+                //display: table-row;
+            }
+            .demo-form__cell {
+                width: 100%;
+                height: 50px;
+                vertical-align: middle;
+                padding: 10px;
+                .cell-item-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    .item-title {
+                        font-size: 14px;
+                        font-weight: bold;
+                        padding-bottom: 5px;
+                        color: #e63a1c;
+                        button {
+                            margin-left: 20px;
+                        }
+                    }
+                    .dependants {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        .item {
+                            width: 48%;
+                            &:first-child {
+                                padding-right: 10px;
+                            }
+                            &:last-child {
+                                padding-left: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.page-header {
+    font-size: 20px;
+}
+.custom-input {
+    width: 100%;
+}
+.text-box {
+    background-color: #FFFFFF;
+    border:           1px solid #dadada;
+    color:            #545454;
+    font-size: 14px;
+    height:           35px;
+    min-width:        35px;
+    padding:          0 10px;
+    width: calc(100% - 22px);
+    outline: 0;
+
+    &:focus {
+        border: 1px solid #ff6700;
+    }
+}
+.error {
+    border: 1px solid #e63a1c;
+}
