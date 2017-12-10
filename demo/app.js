@@ -1,10 +1,3 @@
-/*
- * This file has been created by Ergosign GmbH - All rights reserved - http://www.ergosign.de
- * DO NOT ALTER OR REMOVE THIS COPYRIGHT NOTICE OR THIS FILE HEADER.
- *
- * This file and the code contained in it are subject to the agreed contractual terms and conditions,
- * in particular with regard to resale and publication.
- */
 
 (function (angular) {
     'use strict';
